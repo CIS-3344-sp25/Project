@@ -1,0 +1,56 @@
+const destinationsData = [
+    {
+        "id": 1,
+        "name": "Seoul, South Korea",
+        "image": "images/korea.jpg",
+        "description": "South Korea offers a mix of historical sites, beautiful landscapes like Jeju Island, and cutting-edge technology.",
+        "details": {
+            "long_description": "Seoul, the capital of South Korea, is a vibrant city where modern skyscrapers meet traditional palaces, Buddhist temples, and shopping districts. Known for its food, history, and technology, Seoul is a city that never sleeps.",
+            "itinerary": [
+                "Day 1: Explore Hanok Village, a beautiful traditional Korean village with preserved hanok houses.",
+                "Day 2: Visit Seoul Tower on Namsan Mountain for panoramic views of the city.",
+                "Day 3: Visit the War Memorial of Korea to learn about Korea's history and the Korean War."
+            ]
+        },
+        "location": {
+            "latitude": 37.5665,
+            "longitude": 126.9780
+        }
+    },
+    {
+        "id": 2,
+        "name": "Tokyo, Japan",
+        "image": "images/tokyo.jpg",
+        "description": "Tokyo is known for its beautiful cherry blossoms, serene shrines, and world-class cuisine like sushi and ramen.",
+        "details": {
+            "long_description": "Tokyo, Japan’s cultural heart, is home to ancient temples, stunning gardens, and traditional tea houses. Visitors can experience the harmony of the modern and the traditional, from the neon-lit streets of Shibuya to the peaceful Meiji Shrine.",
+            "itinerary": [
+                "Day 1: Explore Meiji Shrine, located in the forested area in the heart of Tokyo.",
+                "Day 2: Have a meal at Gion District, Kyoto-style kaiseki.",
+                "Day 3: Visit Universal Studios Japan for theme park fun or explore Shinsaibashi for shopping."
+            ]
+        },
+        "location": {
+            "latitude": 35.6762,
+            "longitude": 139.6503
+        }
+    },
+    {
+        "id": 3,
+        "name": "Punta Cana, Dominican Republic",
+        "image": "images/punta.jpg",
+        "description": "Punta Cana is a tropical paradise famous for its pristine beaches, crystal-clear waters, and all-inclusive resorts.",
+        "details": {
+            "long_description": "Located on the eastern coast of the Dominican Republic, Punta Cana is known for its stunning beaches, vibrant nightlife, and a variety of water activities. Whether you're looking for relaxation or adventure, Punta Cana offers the perfect escape.",
+            "itinerary": [
+                "Day 1: Spend the day at Bavaro Beach, relaxing and enjoying water sports.",
+                "Day 2: Take a catamaran cruise and enjoy snorkeling in turquoise waters.",
+                "Day 3: Explore Hoyo Azul, a stunning natural lagoon, and end the day with a visit to Coco Bongo Nightclub."
+            ]
+        },
+        "location": {
+            "latitude": 18.5822,
+            "longitude": -68.4055
+        }
+    }
+];
