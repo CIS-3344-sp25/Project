@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Seoul, South Korea",
-        "image": "images/korea.jpg",
+        "image": "pics/korea.jpg",
         "description": "South Korea offers a mix of historical sites, beautiful landscapes like Jeju Island, and cutting-edge technology.",
         "details": {
             "long_description": "Seoul, the capital of South Korea, is a vibrant city where modern skyscrapers meet traditional palaces, Buddhist temples, and shopping districts. Known for its food, history, and technology, Seoul is a city that never sleeps.",
@@ -20,7 +20,7 @@
     {
         "id": 2,
         "name": "Tokyo, Japan",
-        "image": "images/tokyo.jpg",
+        "image": "pics/tokyo.jpg",
         "description": "Tokyo is known for its beautiful cherry blossoms, serene shrines, and world-class cuisine like sushi and ramen.",
         "details": {
             "long_description": "Tokyo, Japan’s cultural heart, is home to ancient temples, stunning gardens, and traditional tea houses. Visitors can experience the harmony of the modern and the traditional, from the neon-lit streets of Shibuya to the peaceful Meiji Shrine.",
@@ -38,7 +38,7 @@
     {
         "id": 3,
         "name": "Punta Cana, Dominican Republic",
-        "image": "images/punta.jpg",
+        "image": "pics/punta.jpg",
         "description": "Punta Cana is a tropical paradise famous for its pristine beaches, crystal-clear waters, and all-inclusive resorts.",
         "details": {
             "long_description": "Located on the eastern coast of the Dominican Republic, Punta Cana is known for its stunning beaches, vibrant nightlife, and a variety of water activities. Whether you're looking for relaxation or adventure, Punta Cana offers the perfect escape.",
