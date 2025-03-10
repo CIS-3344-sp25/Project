@@ -46,6 +46,17 @@ footer {
     bottom: 0;
 }
 
+#bookingForm{
+    width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+}
+
 #destination-container {
     display: flex; 
     justify-content: space-around; 

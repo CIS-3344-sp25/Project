@@ -56,6 +56,12 @@ const destinationsData = [
     }
 ];
 
+function buttonDisplay(){
+    document.getElementById("message").textContent = "Tour Booked!";
+}
+
+document.getElementById("submitButton").addEventListener("click", buttonDisplay);
+
 // Function to display destinations on the homepage
 function displayDestinations() {
     const destinationContainer = document.getElementById('destination-container');
@@ -66,7 +72,7 @@ function displayDestinations() {
             <img src="${destination.image}" alt="${destination.name}" class="destination-image">
             <h3>${destination.name}</h3>
             <p>${destination.description}</p>
-            <a href="destination.html?id=${destination.id}">View More</a>
+            <a href="destination.html?id=${destination.id}">Explore More</a>
         `;
         destinationContainer.appendChild(card);
     });
@@ -78,7 +84,7 @@ displayDestinations();
 // Function to load destination details on the destination page
 function loadDestinationDetails() {
     const urlParams = new URLSearchParams(window.location.search);
-    const destinationId = parseInt(urlParams.get('id'), 10);
+    const destinationId = parseInt(urlParams.get('id'), 3);
     const destination = destinationsData.find(d => d.id === destinationId);
 
     if (destination) {
