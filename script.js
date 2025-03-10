@@ -74,6 +74,7 @@ function displayDestinations() {
 
 // Call function to display destinations on the homepage
 displayDestinations();
+
 // Function to load destination details on the destination page
 function loadDestinationDetails() {
     const urlParams = new URLSearchParams(window.location.search);
