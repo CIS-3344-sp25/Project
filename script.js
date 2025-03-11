@@ -11,7 +11,7 @@ function fetchDestinations() {
                 card.innerHTML = `
                     <img class="destination-image" src="${dest.image}" alt="${dest.name}">
                     <h3>${dest.name}</h3>
-                    <p>${dest.short_description}</p>
+                    <p>${dest.description}</p>
                     <a href="destination.html?id=${dest.id}">View Details</a>
                 `;
                 container.appendChild(card);
