@@ -1,107 +1,97 @@
-// Sample JSON data for destinations
-const destinationsData = [
-    {
-        "id": 1,
-        "name": "Seoul, South Korea",
-        "image": "pics/korea.jpg",
-        "description": "South Korea offers a mix of historical sites, beautiful landscapes like Jeju Island, and cutting-edge technology.",
-        "details": {
-            "long_description": "Seoul, the capital of South Korea, is a vibrant city where modern skyscrapers meet traditional palaces, Buddhist temples, and shopping districts.",
-            "itinerary": [
-                "Day 1: Explore Hanok Village.",
-                "Day 2: Visit Seoul Tower.",
-                "Day 3: Visit the War Memorial of Korea."
-            ]
-        },
-        "location": {
-            "latitude": 37.5665,
-            "longitude": 126.9780
-        }
-    },
-    {
-        "id": 2,
-        "name": "Tokyo, Japan",
-        "image": "pics/tokyo.jpg",
-        "description": "Tokyo is known for its beautiful cherry blossoms, serene shrines, and world-class cuisine like sushi and ramen.",
-        "details": {
-            "long_description": "Tokyo is home to ancient temples, stunning gardens, and traditional tea houses.",
-            "itinerary": [
-                "Day 1: Explore Meiji Shrine.",
-                "Day 2: Meal at Gion District.",
-                "Day 3: Visit Universal Studios Japan."
-            ]
-        },
-        "location": {
-            "latitude": 35.6762,
-            "longitude": 139.6503
-        }
-    },
-    {
-        "id": 3,
-        "name": "Punta Cana, Dominican Republic",
-        "image": "pics/punta.jpg",
-        "description": "Punta Cana is famous for its pristine beaches, crystal-clear waters, and all-inclusive resorts.",
-        "details": {
-            "long_description": "Punta Cana is known for stunning beaches, vibrant nightlife, and a variety of water activities.",
-            "itinerary": [
-                "Day 1: Spend the day at Bavaro Beach.",
-                "Day 2: Take a catamaran cruise.",
-                "Day 3: Explore Hoyo Azul lagoon."
-            ]
-        },
-        "location": {
-            "latitude": 18.5822,
-            "longitude": -68.4055
-        }
-    }
-];
-
-function buttonDisplay(){
-    document.getElementById("message").textContent = "Tour Booked!";
+// Fetch data for destinations
+function fetchDestinations() {
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            // Populate homepage with destination cards
+            const container = document.getElementById('destination-container');
+            data.forEach(dest => {
+                const card = document.createElement('div');
+                card.classList.add('destination-card');
+                card.innerHTML = `
+                    <img class="destination-image" src="${dest.image}" alt="${dest.name}">
+                    <h3>${dest.name}</h3>
+                    <p>${dest.short_description}</p>
+                    <a href="destination.html?id=${dest.id}">View Details</a>
+                `;
+                container.appendChild(card);
+            });
+        })
+        .catch(error => console.error('Error fetching destinations:', error));
 }
 
-document.getElementById("submitButton").addEventListener("click", buttonDisplay);
+// Load destination details when on the destination page
+function loadDestinationDetails() {
+    const params = new URLSearchParams(window.location.search);
+    const destinationId = parseInt(params.get('id'), 10);
 
-// Function to display destinations on the homepage
-function displayDestinations() {
-    const destinationContainer = document.getElementById('destination-container');
-    destinationsData.forEach(destination => {
-        const card = document.createElement('div');
-        card.classList.add('destination-card');
-        card.innerHTML = `
-            <img src="${destination.image}" alt="${destination.name}" class="destination-image">
-            <h3>${destination.name}</h3>
-            <p>${destination.description}</p>
-            <a href="destination.html?id=${destination.id}">Explore More</a>
-        `;
-        destinationContainer.appendChild(card);
+    fetch('data.json')
+        .then(response => response.json())
+        .then(destinations => {
+            const destination = destinations.find(dest => dest.id === destinationId);
+            if (destination) {
+                // Populate destination details page
+                document.getElementById('destination-image').src = destination.image;
+                document.getElementById('destination-name').textContent = destination.name;
+                document.getElementById('destination-description').textContent = destination.long_description;
+
+                // Add itinerary
+                const itineraryList = document.getElementById('itinerary-list');
+                itineraryList.innerHTML = ''; // Clear any existing list items
+                destination.details.itinerary.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = item;
+                    itineraryList.appendChild(listItem);
+                });
+
+                // Map container (displaying coordinates)
+                const mapContainer = document.getElementById('map-container');
+                mapContainer.textContent = `Latitude: ${destination.location.latitude} | Longitude: ${destination.location.longitude}`;
+
+                // Optional: You can integrate a map library (e.g., Google Maps) here
+            }
+        })
+        .catch(error => console.error('Error loading destination details:', error));
+}
+
+// Handle booking form submission
+function handleBookingForm() {
+    const form = document.getElementById('form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const travelers = document.getElementById('travelers').value;
+        const date = document.getElementById('date').value;
+
+        // Validation
+        const currentDate = new Date();
+        const travelDate = new Date(date);
+        if (travelDate < currentDate) {
+            alert('Travel date must be today or in the future.');
+            return;
+        }
+
+        if (travelers < 1) {
+            alert('Number of travelers must be at least 1.');
+            return;
+        }
+
+        // Log booking details
+        console.log('Booking Submitted:', { name, email, travelers, date });
+        alert('Tour Booked!');
+
+        // Clear form
+        form.reset();
     });
 }
 
-// Call function to display destinations on the homepage
-displayDestinations();
-
-// Function to load destination details on the destination page
-function loadDestinationDetails() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const destinationId = parseInt(urlParams.get('id'), 3);
-    const destination = destinationsData.find(d => d.id === destinationId);
-
-    if (destination) {
-        document.getElementById('destination-image').src = destination.image;
-        document.getElementById('destination-name').textContent = destination.name;
-        document.getElementById('destination-description').textContent = destination.details.long_description;
-
-        const itineraryList = document.getElementById('itinerary-list');
-        destination.details.itinerary.forEach(item => {
-            const listItem = document.createElement('li');
-            listItem.textContent = item;
-            itineraryList.appendChild(listItem);
-        });
+// Initialize on respective pages
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('destination-container')) {
+        fetchDestinations();
+    } else if (document.getElementById('destination-info')) {
+        loadDestinationDetails();
+        handleBookingForm();
     }
-}
-
-// Call function to load destination details if on destination.html
-if (window.location.pathname.includes('destination.html')) {
-    window.onload = loadDestinationDetails;
-}
+});
