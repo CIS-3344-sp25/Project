@@ -67,7 +67,7 @@ function handleBookingForm() {
         // Validation
         const currentDate = new Date();
         const travelDate = new Date(date);
-        if (travelDate < currentDate) {
+        if (travelDate <= currentDate) {
             alert('Travel date must be today or in the future.');
             return;
         }
