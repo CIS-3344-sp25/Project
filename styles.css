@@ -92,3 +92,10 @@ a {
     position: relative; 
     padding-left: 25px; 
 }
+
+#location-coordinates {
+    justify-content: flex-start;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}

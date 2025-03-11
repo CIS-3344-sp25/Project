@@ -12,6 +12,7 @@ function fetchDestinations() {
                     <img class="destination-image" src="${dest.image}" alt="${dest.name}">
                     <h3>${dest.name}</h3>
                     <p>${dest.description}</p>
+
                     <a href="destination.html?id=${dest.id}">View Details</a>
                 `;
                 container.appendChild(card);
@@ -44,11 +45,13 @@ function loadDestinationDetails() {
                     itineraryList.appendChild(listItem);
                 });
 
+                const locationCoordinates = document.getElementById('location-coordinates');
+                locationCoordinates.textContent = `Latitude: ${destination.location.latitude}, Longitude: ${destination.location.longitude}`;
+
                 // Map container (displaying coordinates)
                 const mapContainer = document.getElementById('map-container');
                 mapContainer.textContent = `Latitude: ${destination.location.latitude} | Longitude: ${destination.location.longitude}`;
 
-                // Optional: You can integrate a map library (e.g., Google Maps) here
             }
         })
         .catch(error => console.error('Error loading destination details:', error));
