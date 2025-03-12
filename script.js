@@ -48,15 +48,46 @@ function loadDestinationDetails() {
                 const locationCoordinates = document.getElementById('location-coordinates');
                 locationCoordinates.textContent = `Latitude: ${destination.location.latitude}, Longitude: ${destination.location.longitude}`;
 
-                // Map container (displaying coordinates)
+                // Initialize Leaflet map
                 const mapContainer = document.getElementById('map-container');
-                mapContainer.innerHTML = ''; // Clear any existing content
+                
+                // Debugging: Check if the map container is available
+                console.log(mapContainer); 
 
+                const latitude = destination.location.latitude;
+                const longitude = destination.location.longitude;
 
+                // Debugging: Check if coordinates are correct
+                console.log('Coordinates:', latitude, longitude);
+
+                if (mapContainer) {
+                    // Create a map and set its initial view (centered on the destination)
+                    const map = L.map(mapContainer).setView([latitude, longitude], 13);
+
+                    // Add OpenStreetMap tiles
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+
+                    // Add a marker at the destination's location
+                    L.marker([latitude, longitude]).addTo(map)
+                        .bindPopup(`
+                            <b>${destination.name}</b>
+                            <br><img src="${destination.image}" alt="${destination.name}" style="width: 100%; max-height: 200px;">
+                            <p>${destination.description}</p>
+                        `);
+
+                    // Optionally, adjust the map view to fit the marker
+                    map.setView([latitude, longitude], 13);
+                } else {
+                    console.error("Map container not found");
+                }
             }
         })
         .catch(error => console.error('Error loading destination details:', error));
 }
+
+
 
 // Handle booking form submission
 function handleBookingForm() {

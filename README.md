@@ -34,7 +34,7 @@ Traveling Portal
 <ul> Task 4: Styling and Responsiveness
 <li>Still working on the color scheme</li>
 <li>Making sure there isn't any gaps between the content</li>
-<li>I haven't added the responsive design yet which I should work on</li>
+<li>Added the responsive design to make it fully function</li>
 <li>Still working on the spacing, padding and margining</li>
 </ul>
 
