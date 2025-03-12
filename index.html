@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traveling Destinations</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 </head>
+
 <body>
     <header>
         <h1>Welcome to Traveling Enterprises</h1>
     </header>
 
     <main>
-        <section id ="destination-container">
+        <section id="destination-container">
             <!-- Destination cards will be populated here by JavaScript -->
         </section>
+
+        <!-- Map container -->
+        <section id="map-container" style="height: 400px;"></section>
+
     </main>
 
     <footer>
@@ -23,4 +36,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

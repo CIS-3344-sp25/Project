@@ -50,7 +50,8 @@ function loadDestinationDetails() {
 
                 // Map container (displaying coordinates)
                 const mapContainer = document.getElementById('map-container');
-                mapContainer.textContent = `Latitude: ${destination.location.latitude} | Longitude: ${destination.location.longitude}`;
+                mapContainer.innerHTML = ''; // Clear any existing content
+
 
             }
         })

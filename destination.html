@@ -14,22 +14,24 @@
     </header>
 
     <main>
-        <!--Destination Information-->
+        <!-- Destination Details -->
         <section id="destination-info">
-            <img id="destination-image" src="" alt="Destination Image" />
-            <h2 id="destination-name"></h2>
+            <h1 id="destination-name"></h1>
+            <img id="destination-image" alt="Destination Image" />
             <p id="destination-description"></p>
+            <section id="itinerary">
+                <h3>Itinerary</h3>
+                <ul id="itinerary-list"></ul>
+            </section>
         </section>
 
-        <section id="itinerary">
-            <h3>Itinerary</h3>
-            <ul id="itinerary-list"></ul>
-        </section>
-
-        <section id="map">
+        <!-- Map Section -->
+        <section id="map-section">
             <h3>Location</h3>
-            <p id ="location-coordinates"></p>
+            <div id="map-container" style="height: 400px;"></div> <!-- Map will appear here -->
+            <div id="location-coordinates"></div> <!-- Coordinates Section -->
         </section>
+
 
         <section id="bookingForm">
             <h2>Book Trip: </h2>
@@ -53,7 +55,7 @@
                 <input type="date" id="date" name="date" required>
 
                 <button id="submitButton" type="submit">Submit</button>
-                <p id = "message"></p>
+                <p id="message"></p>
 
             </form>
         </section>

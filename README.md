@@ -29,7 +29,7 @@ Traveling Portal
 <li>Booking form is completed, also added dropdown</li>
 <li>Fields are done from the start, and made sure only around and above 1 traveler should work and the required date. </li>
 <li>All Fields are mandatory</li>
-<ul>
+</ul>
 
 <ul> Task 4: Styling and Responsiveness
 <li>Still working on the color scheme</li>
