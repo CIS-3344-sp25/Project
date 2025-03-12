@@ -16,7 +16,7 @@ Traveling Portal
 <ul>Task 2: Destination Details Page
 <li>Able to go to the new page with details and image</li>
 <li>Itinerary is shown</li>
-<li>I'm still figuring out the map concept of html which I'm still confused about, I don't remember if we went over this in class</li>
+<li>I was able to implement the map of each location</li>
 <li>Booking Form is done, also made the dropdown of each location</li>
 </ul>
 
@@ -36,9 +36,10 @@ Traveling Portal
 <li>Making sure there isn't any gaps between the content</li>
 <li>Added the responsive design to make it fully function</li>
 <li>Still working on the spacing, padding and margining</li>
+<li>CSS Styling for me is finished</li>
 </ul>
 
 <ul> Bonus:
-<li>I'll work on the bonus whenever I finish the rest of the task</li>
+<li>Rest of the tasks are done I believe, hopefully I can get the extra bonus done before tonight</li>
 </ul>
 
