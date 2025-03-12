@@ -3,22 +3,49 @@ function fetchDestinations() {
     fetch('data.json')
         .then(response => response.json())
         .then(data => {
-            // Populate homepage with destination cards
-            const container = document.getElementById('destination-container');
-            data.forEach(dest => {
-                const card = document.createElement('div');
-                card.classList.add('destination-card');
-                card.innerHTML = `
-                    <img class="destination-image" src="${dest.image}" alt="${dest.name}">
-                    <h3>${dest.name}</h3>
-                    <p>${dest.description}</p>
+            // Store all destinations in localStorage (optional)
+            localStorage.setItem('allDestinations', JSON.stringify(data));
 
-                    <a href="destination.html?id=${dest.id}">View Details</a>
-                `;
-                container.appendChild(card);
-            });
+            // Initially populate homepage with all destinations
+            displayDestinations(data);
         })
         .catch(error => console.error('Error fetching destinations:', error));
+}
+
+// Function to display destinations
+function displayDestinations(destinations) {
+    const container = document.getElementById('destination-container');
+    container.innerHTML = ''; // Clear previous results
+    destinations.forEach(dest => {
+        const card = document.createElement('div');
+        card.classList.add('destination-card');
+        card.innerHTML = `
+            <img class="destination-image" src="${dest.image}" alt="${dest.name}">
+            <h3>${dest.name}</h3>
+            <p>${dest.description}</p>
+            <a href="destination.html?id=${dest.id}">View Details</a>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// Function to handle search functionality
+function searchDestinations(event) {
+    const query = event.target.value.toLowerCase(); // Get the search query
+    const allDestinations = JSON.parse(localStorage.getItem('allDestinations')); // Get all destinations from localStorage
+
+    if (allDestinations) {
+        // Filter destinations based on the search query
+        const filteredDestinations = allDestinations.filter(dest => {
+            return (
+                dest.name.toLowerCase().includes(query) ||
+                dest.description.toLowerCase().includes(query)
+            );
+        });
+
+        // Display filtered destinations
+        displayDestinations(filteredDestinations);
+    }
 }
 
 // Load destination details when on the destination page
@@ -50,44 +77,31 @@ function loadDestinationDetails() {
 
                 // Initialize Leaflet map
                 const mapContainer = document.getElementById('map-container');
-                
-                // Debugging: Check if the map container is available
-                console.log(mapContainer); 
-
                 const latitude = destination.location.latitude;
                 const longitude = destination.location.longitude;
 
-                // Debugging: Check if coordinates are correct
-                console.log('Coordinates:', latitude, longitude);
+                // Create a map and set its initial view (centered on the destination)
+                const map = L.map(mapContainer).setView([latitude, longitude], 13);
 
-                if (mapContainer) {
-                    // Create a map and set its initial view (centered on the destination)
-                    const map = L.map(mapContainer).setView([latitude, longitude], 13);
+                // Add OpenStreetMap tiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
 
-                    // Add OpenStreetMap tiles
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    }).addTo(map);
+                // Add a marker at the destination's location
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup(`
+                        <b>${destination.name}</b>
+                        <br><img src="${destination.image}" alt="${destination.name}" style="width: 100%; max-height: 200px;">
+                        <p>${destination.description}</p>
+                    `);
 
-                    // Add a marker at the destination's location
-                    L.marker([latitude, longitude]).addTo(map)
-                        .bindPopup(`
-                            <b>${destination.name}</b>
-                            <br><img src="${destination.image}" alt="${destination.name}" style="width: 100%; max-height: 200px;">
-                            <p>${destination.description}</p>
-                        `);
-
-                    // Optionally, adjust the map view to fit the marker
-                    map.setView([latitude, longitude], 13);
-                } else {
-                    console.error("Map container not found");
-                }
+                // Optionally, adjust the map view to fit the marker
+                map.setView([latitude, longitude], 13);
             }
         })
         .catch(error => console.error('Error loading destination details:', error));
 }
-
-
 
 // Handle booking form submission
 function handleBookingForm() {
@@ -124,8 +138,13 @@ function handleBookingForm() {
 // Initialize on respective pages
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('destination-container')) {
+        // This means the current page is the homepage or search page
         fetchDestinations();
+
+        // Set up the search input listener
+        document.getElementById('search-input').addEventListener('input', searchDestinations);
     } else if (document.getElementById('destination-info')) {
+        // This means the current page is destination.html
         loadDestinationDetails();
         handleBookingForm();
     }
